@@ -44,7 +44,8 @@
        [:div
         [Scene {:width 300 :height 300 :camera "maincamera"}
          [PerspectiveCamera camera-props]
-         [Cupcake (* 0.01 @rotation)]] 
+         [Cupcake (* 0.01 @rotation)]]] 
+       [:div
         [Scene {:width 300 :height 300 :camera "maincamera"}
          [PerspectiveCamera camera-props]
          [Cupcake (* 0.001 @rotation)]]]
