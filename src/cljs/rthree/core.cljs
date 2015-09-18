@@ -9,6 +9,17 @@
   (reagent/render [views/main-panel]
                   (.getElementById js/document "app")))
 
+(defonce timeout-id (atom nil))
+
+(when @timeout-id
+  (js/clearInterval @timeout-id))
+
+(reset! timeout-id
+        (js/setInterval
+          (fn []
+            (re-frame/dispatch-sync [:tick]))
+          16))
+
 (defn ^:export init [] 
   (re-frame/dispatch-sync [:initialize-db])
   (mount-root))

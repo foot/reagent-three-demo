@@ -4,5 +4,10 @@
 
 (re-frame/register-handler
  :initialize-db
- (fn  [_ _]
+ (fn [_ _]
    db/default-db))
+
+(re-frame/register-handler
+ :tick
+ (fn [db _]
+   (update db :rotation inc)))

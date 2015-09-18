@@ -2,8 +2,6 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.48"]
                  [reagent "0.5.1-rc3" :exclusions [cljsjs/react]]
-                 [cljsjs/react-with-addons "0.13.3-0"]
-                 [cljsjs/react "0.13.3-0"]
                  [re-frame "0.4.1"]]
 
   :source-paths ["src/clj"]
