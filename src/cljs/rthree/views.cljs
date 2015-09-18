@@ -73,10 +73,18 @@
 
 (defn main-panel []
   (let [rotation (re-frame/subscribe [:rotation])
-        camera-props (re-frame/subscribe [:camera-props])]
+        camera-props (re-frame/subscribe [:camera-props])
+        rotation-speed (re-frame/subscribe [:rotation-speed])]
 
     (fn []
       [:div
-       [:div [example-scene @camera-props (* 0.001 @rotation)]]
+       [:div [example-scene @camera-props (* @rotation-speed @rotation)]]
+       [:input {:type "range"
+                :min 0
+                :max 0.05 
+                :step 0.001
+                :value @rotation-speed
+                :on-change (fn [ev] (let [v (-> ev .-target .-value )]
+                                      (re-frame/dispatch [:rotation-speed v])))}]
        [:div [example-scene @camera-props (* 0.01 @rotation)]]
        [:p (str "t = " @rotation)]])))

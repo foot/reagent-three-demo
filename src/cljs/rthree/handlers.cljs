@@ -16,3 +16,8 @@
  :camera-update
  (fn [db [_ new-params]]
    (update-in db [:camera] into new-params)))
+
+(re-frame/register-handler
+ :rotation-speed
+ (fn [db [_ new-value]]
+   (assoc db :rotation-speed new-value)))

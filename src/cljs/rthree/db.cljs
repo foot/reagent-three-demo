@@ -2,6 +2,7 @@
 
 (def default-db
   {:rotation 1
+   :rotation-speed 0.001
    :camera {:fov 75
             :aspect 1
             :near 1
