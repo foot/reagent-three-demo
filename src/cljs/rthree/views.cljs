@@ -11,7 +11,7 @@
 
 (defn assetpath [filename] (str "/assets/" filename))
 
-(defn Cupcake []
+(defn cupcake []
   (let [box-geometry (new js/THREE.BoxGeometry 200 200 200)
         cupcake-texture (js/THREE.ImageUtils.loadTexture (assetpath "cupCake.png"))   
         cupcake-material (new THREE.MeshBasicMaterial #js {:map cupcake-texture})  
@@ -30,23 +30,22 @@
                 :geometry box-geometry
                 :material cream-material}]]))))
 
-(defn main-panel []
-  (let [rotation (re-frame/subscribe [:rotation])
-        camera-props {:fov 75
+(defn example-scene [rotation]
+  (let [camera-props {:fov 75
                       :aspect 1
                       :near 1
                       :name "maincamera"
                       :far 5000
                       :position (new js/THREE.Vector3 0 0 600)
                       :lookat (new js/THREE.Vector3 0 0 0)}]
+    [Scene {:width 300 :height 300 :camera "maincamera"}
+     [PerspectiveCamera camera-props]
+     [cupcake rotation]]))
+
+(defn main-panel []
+  (let [rotation (re-frame/subscribe [:rotation])]
     (fn []
       [:div
-       [:div
-        [Scene {:width 300 :height 300 :camera "maincamera"}
-         [PerspectiveCamera camera-props]
-         [Cupcake (* 0.01 @rotation)]]] 
-       [:div
-        [Scene {:width 300 :height 300 :camera "maincamera"}
-         [PerspectiveCamera camera-props]
-         [Cupcake (* 0.001 @rotation)]]]
+       [:div [example-scene (* 0.001 @rotation)]]
+       [:div [example-scene (* 0.01 @rotation)]]
        [:p (str "t = " @rotation)]])))
