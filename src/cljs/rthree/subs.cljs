@@ -6,3 +6,8 @@
  :rotation
  (fn [db]
    (reaction (:rotation @db))))
+
+(re-frame/register-sub
+ :camera-props
+ (fn [db]
+   (reaction (:camera @db))))

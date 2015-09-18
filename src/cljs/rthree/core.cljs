@@ -17,7 +17,7 @@
 (reset! timeout-id
         (js/setInterval
           (fn []
-            (re-frame/dispatch-sync [:tick]))
+            (re-frame/dispatch [:tick]))
           16))
 
 (defn ^:export init [] 

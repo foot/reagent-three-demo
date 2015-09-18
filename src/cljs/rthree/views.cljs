@@ -33,7 +33,9 @@
                 :geometry box-geometry
                 :material cream-material}]]))))
 
-(defn setup-control-script
+(defn attach-camera-control-script
+  "Attach a camera control script. js/THREE.OrbitControls leaves
+  event-listeners all over the place unfortunately."
   [node params cb]
   (let [dummy-camera (doto
                        (new js/THREE.PerspectiveCamera
@@ -43,37 +45,37 @@
                             (:far params))
                        (aset "position" "z" (aget (:position params) "z")))
         controls (new js/THREE.OrbitControls dummy-camera node)]
+
+    (.addEventListener controls "change" (fn [ev]
+                                           (let [camera (-> ev .-target .-object)
+                                                 position (.-position camera)
+                                                 quaternion (.-quaternion camera)]
+                                             (cb [position quaternion]))))
     controls))
 
-(defn example-scene [rotation]
-  (let [ps (atom {:fov 75
-                  :aspect 1
-                  :near 1
-                  :name "maincamera"
-                  :far 5000
-                  :position (new js/THREE.Vector3 0 0 600)})]
-    (reagent/create-class
-      {:component-did-mount
-       (fn [this] 
-         (let [node (reagent/dom-node this)
-               controls (setup-control-script node @ps identity)]
-           (.addEventListener controls "change"
-                              (fn [ev]
-                                (let [camera (-> ev .-target .-object)
-                                      position (.-position camera)
-                                      quaternion (.-quaternion camera)]
-                                  (swap! ps into {:position position
-                                                  :quaternion quaternion}))))))
-       :reagent-render
-       (fn [rotation]
-         [Scene {:width 300 :height 300 :camera "maincamera"}
-          [PerspectiveCamera @ps]
-          [cupcake rotation]])})))
+(defn example-scene [camera-props rotation]
+  (reagent/create-class
+    {:component-did-mount
+     (fn [this] 
+       (let [node (reagent/dom-node this)
+             controls (attach-camera-control-script
+                        node
+                        camera-props
+                        (fn [[position quaternion]]
+                          (re-frame/dispatch
+                            [:camera-update {:position position
+                                             :quaternion quaternion}])))]))
+     :reagent-render
+     (fn [camera-props rotation]
+       [Scene {:width 300 :height 300 :camera "maincamera"}
+        [PerspectiveCamera camera-props]
+        [cupcake rotation]])}))
 
 (defn main-panel []
-  (let [rotation (re-frame/subscribe [:rotation])]
+  (let [rotation (re-frame/subscribe [:rotation])
+        camera-props (re-frame/subscribe [:camera-props])]
 
     (fn []
       [:div
-       [:div [example-scene (* 0.01 @rotation)]]
+       [:div [example-scene @camera-props (* 0.01 @rotation)]]
        [:p (str "t = " @rotation)]])))

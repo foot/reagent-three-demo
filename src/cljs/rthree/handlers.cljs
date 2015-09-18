@@ -11,3 +11,8 @@
  :tick
  (fn [db _]
    (update db :rotation inc)))
+
+(re-frame/register-handler
+ :camera-update
+ (fn [db [_ new-params]]
+   (update-in db [:camera] into new-params)))
