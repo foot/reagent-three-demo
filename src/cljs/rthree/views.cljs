@@ -77,5 +77,6 @@
 
     (fn []
       [:div
+       [:div [example-scene @camera-props (* 0.001 @rotation)]]
        [:div [example-scene @camera-props (* 0.01 @rotation)]]
        [:p (str "t = " @rotation)]])))
