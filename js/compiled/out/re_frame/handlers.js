@@ -13,51 +13,51 @@ return new cljs.core.Keyword(null,"re-frame-factory-name","re-frame-factory-name
 var factory_names_in = (function re_frame$handlers$report_middleware_factories_$_factory_names_in(v__$1){
 return cljs.core.remove.call(null,cljs.core.nil_QMARK_,cljs.core.map.call(null,name_of_factory,v__$1));
 });
-var seq__26461 = cljs.core.seq.call(null,factory_names_in.call(null,v));
-var chunk__26462 = null;
-var count__26463 = (0);
-var i__26464 = (0);
+var seq__26476 = cljs.core.seq.call(null,factory_names_in.call(null,v));
+var chunk__26477 = null;
+var count__26478 = (0);
+var i__26479 = (0);
 while(true){
-if((i__26464 < count__26463)){
-var name = cljs.core._nth.call(null,chunk__26462,i__26464);
+if((i__26479 < count__26478)){
+var name = cljs.core._nth.call(null,chunk__26477,i__26479);
 re_frame.utils.error.call(null,"re-frame: \"",name,"\" used incorrectly. Must be used like this \"(",name," ...)\", whereas you just used \"",name,"\".");
 
-var G__26465 = seq__26461;
-var G__26466 = chunk__26462;
-var G__26467 = count__26463;
-var G__26468 = (i__26464 + (1));
-seq__26461 = G__26465;
-chunk__26462 = G__26466;
-count__26463 = G__26467;
-i__26464 = G__26468;
+var G__26480 = seq__26476;
+var G__26481 = chunk__26477;
+var G__26482 = count__26478;
+var G__26483 = (i__26479 + (1));
+seq__26476 = G__26480;
+chunk__26477 = G__26481;
+count__26478 = G__26482;
+i__26479 = G__26483;
 continue;
 } else {
-var temp__4425__auto__ = cljs.core.seq.call(null,seq__26461);
+var temp__4425__auto__ = cljs.core.seq.call(null,seq__26476);
 if(temp__4425__auto__){
-var seq__26461__$1 = temp__4425__auto__;
-if(cljs.core.chunked_seq_QMARK_.call(null,seq__26461__$1)){
-var c__19312__auto__ = cljs.core.chunk_first.call(null,seq__26461__$1);
-var G__26469 = cljs.core.chunk_rest.call(null,seq__26461__$1);
-var G__26470 = c__19312__auto__;
-var G__26471 = cljs.core.count.call(null,c__19312__auto__);
-var G__26472 = (0);
-seq__26461 = G__26469;
-chunk__26462 = G__26470;
-count__26463 = G__26471;
-i__26464 = G__26472;
+var seq__26476__$1 = temp__4425__auto__;
+if(cljs.core.chunked_seq_QMARK_.call(null,seq__26476__$1)){
+var c__19312__auto__ = cljs.core.chunk_first.call(null,seq__26476__$1);
+var G__26484 = cljs.core.chunk_rest.call(null,seq__26476__$1);
+var G__26485 = c__19312__auto__;
+var G__26486 = cljs.core.count.call(null,c__19312__auto__);
+var G__26487 = (0);
+seq__26476 = G__26484;
+chunk__26477 = G__26485;
+count__26478 = G__26486;
+i__26479 = G__26487;
 continue;
 } else {
-var name = cljs.core.first.call(null,seq__26461__$1);
+var name = cljs.core.first.call(null,seq__26476__$1);
 re_frame.utils.error.call(null,"re-frame: \"",name,"\" used incorrectly. Must be used like this \"(",name," ...)\", whereas you just used \"",name,"\".");
 
-var G__26473 = cljs.core.next.call(null,seq__26461__$1);
-var G__26474 = null;
-var G__26475 = (0);
-var G__26476 = (0);
-seq__26461 = G__26473;
-chunk__26462 = G__26474;
-count__26463 = G__26475;
-i__26464 = G__26476;
+var G__26488 = cljs.core.next.call(null,seq__26476__$1);
+var G__26489 = null;
+var G__26490 = (0);
+var G__26491 = (0);
+seq__26476 = G__26488;
+chunk__26477 = G__26489;
+count__26478 = G__26490;
+i__26479 = G__26491;
 continue;
 }
 } else {
@@ -114,23 +114,23 @@ return cljs.core.reset_BANG_.call(null,re_frame.handlers.id__GT_fn,cljs.core.Per
  * generally be used.
  */
 re_frame.handlers.register_base = (function re_frame$handlers$register_base(){
-var args26477 = [];
-var len__19567__auto___26480 = arguments.length;
-var i__19568__auto___26481 = (0);
+var args26492 = [];
+var len__19567__auto___26495 = arguments.length;
+var i__19568__auto___26496 = (0);
 while(true){
-if((i__19568__auto___26481 < len__19567__auto___26480)){
-args26477.push((arguments[i__19568__auto___26481]));
+if((i__19568__auto___26496 < len__19567__auto___26495)){
+args26492.push((arguments[i__19568__auto___26496]));
 
-var G__26482 = (i__19568__auto___26481 + (1));
-i__19568__auto___26481 = G__26482;
+var G__26497 = (i__19568__auto___26496 + (1));
+i__19568__auto___26496 = G__26497;
 continue;
 } else {
 }
 break;
 }
 
-var G__26479 = args26477.length;
-switch (G__26479) {
+var G__26494 = args26492.length;
+switch (G__26494) {
 case 2:
 return re_frame.handlers.register_base.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -140,7 +140,7 @@ return re_frame.handlers.register_base.cljs$core$IFn$_invoke$arity$3((arguments[
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args26477.length)].join('')));
+throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args26492.length)].join('')));
 
 }
 });
@@ -180,13 +180,13 @@ return re_frame.utils.error.call(null,"re-frame: no event handler registered for
 if(cljs.core.truth_(re_frame.handlers._STAR_handling_STAR_)){
 return re_frame.utils.error.call(null,"re-frame: while handling \"",re_frame.handlers._STAR_handling_STAR_,"\"  dispatch-sync was called for \"",event_v,"\". You can't call dispatch-sync in an event handler.");
 } else {
-var _STAR_handling_STAR_26485 = re_frame.handlers._STAR_handling_STAR_;
+var _STAR_handling_STAR_26500 = re_frame.handlers._STAR_handling_STAR_;
 re_frame.handlers._STAR_handling_STAR_ = event_v;
 
 try{return handler_fn.call(null,re_frame.db.app_db,event_v);
-}finally {re_frame.handlers._STAR_handling_STAR_ = _STAR_handling_STAR_26485;
+}finally {re_frame.handlers._STAR_handling_STAR_ = _STAR_handling_STAR_26500;
 }}
 }
 });
 
-//# sourceMappingURL=handlers.js.map?rel=1441976679719
+//# sourceMappingURL=handlers.js.map?rel=1442923849316

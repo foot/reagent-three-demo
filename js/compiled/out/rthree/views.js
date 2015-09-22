@@ -9,7 +9,7 @@ rthree.views.PerspectiveCamera = reagent.core.adapt_react_class.call(null,ReactT
 rthree.views.Mesh = reagent.core.adapt_react_class.call(null,ReactTHREE.Mesh);
 rthree.views.Object3D = reagent.core.adapt_react_class.call(null,ReactTHREE.Object3D);
 rthree.views.assetpath = (function rthree$views$assetpath(filename){
-return [cljs.core.str("/assets/"),cljs.core.str(filename)].join('');
+return [cljs.core.str("assets/"),cljs.core.str(filename)].join('');
 });
 rthree.views.cupcake = (function rthree$views$cupcake(){
 var box_geometry = (new THREE.BoxGeometry((200),(200),(200)));
@@ -19,10 +19,10 @@ var cream_texture = THREE.ImageUtils.loadTexture(rthree.views.assetpath.call(nul
 var cream_material = (new THREE.MeshBasicMaterial({"map": cream_texture}));
 return ((function (box_geometry,cupcake_texture,cupcake_material,cream_texture,cream_material){
 return (function (rotation){
-var q = (function (){var G__23859 = (new THREE.Quaternion());
-G__23859.setFromEuler((new THREE.Euler(rotation,(rotation * (3)),(0))));
+var q = (function (){var G__33211 = (new THREE.Quaternion());
+G__33211.setFromEuler((new THREE.Euler(rotation,(rotation * (3)),(0))));
 
-return G__23859;
+return G__33211;
 })();
 var p = (new THREE.Vector3(((((300) * Math.sin(rotation)) * (0)) * (0))));
 return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [rthree.views.Object3D,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"quaternion","quaternion",1845825618),q,new cljs.core.Keyword(null,"position","position",-2011731912),p], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [rthree.views.Mesh,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"position","position",-2011731912),(new THREE.Vector3((0),(-100),(0))),new cljs.core.Keyword(null,"geometry","geometry",-405034994),box_geometry,new cljs.core.Keyword(null,"material","material",460118677),cupcake_material], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [rthree.views.Mesh,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"position","position",-2011731912),(new THREE.Vector3((0),(100),(0))),new cljs.core.Keyword(null,"geometry","geometry",-405034994),box_geometry,new cljs.core.Keyword(null,"material","material",460118677),cream_material], null)], null)], null);
@@ -34,10 +34,10 @@ return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMP
  * event-listeners all over the place unfortunately.
  */
 rthree.views.attach_camera_control_script = (function rthree$views$attach_camera_control_script(node,params,cb){
-var dummy_camera = (function (){var G__23861 = (new THREE.PerspectiveCamera(new cljs.core.Keyword(null,"fov","fov",-12463282).cljs$core$IFn$_invoke$arity$1(params),new cljs.core.Keyword(null,"aspect","aspect",-839905246).cljs$core$IFn$_invoke$arity$1(params),new cljs.core.Keyword(null,"near","near",-1077668328).cljs$core$IFn$_invoke$arity$1(params),new cljs.core.Keyword(null,"far","far",85807546).cljs$core$IFn$_invoke$arity$1(params)));
-(G__23861["position"]["z"] = (new cljs.core.Keyword(null,"position","position",-2011731912).cljs$core$IFn$_invoke$arity$1(params)["z"]));
+var dummy_camera = (function (){var G__33213 = (new THREE.PerspectiveCamera(new cljs.core.Keyword(null,"fov","fov",-12463282).cljs$core$IFn$_invoke$arity$1(params),new cljs.core.Keyword(null,"aspect","aspect",-839905246).cljs$core$IFn$_invoke$arity$1(params),new cljs.core.Keyword(null,"near","near",-1077668328).cljs$core$IFn$_invoke$arity$1(params),new cljs.core.Keyword(null,"far","far",85807546).cljs$core$IFn$_invoke$arity$1(params)));
+(G__33213["position"]["z"] = (new cljs.core.Keyword(null,"position","position",-2011731912).cljs$core$IFn$_invoke$arity$1(params)["z"]));
 
-return G__23861;
+return G__33213;
 })();
 var controls = (new THREE.OrbitControls(dummy_camera,node));
 controls.addEventListener("change",((function (dummy_camera,controls){
@@ -55,10 +55,10 @@ rthree.views.example_scene = (function rthree$views$example_scene(camera_props,r
 return reagent.core.create_class.call(null,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"component-did-mount","component-did-mount",-1126910518),(function (this$){
 var node = reagent.core.dom_node.call(null,this$);
 var controls = rthree.views.attach_camera_control_script.call(null,node,camera_props,((function (node){
-return (function (p__23864){
-var vec__23865 = p__23864;
-var position = cljs.core.nth.call(null,vec__23865,(0),null);
-var quaternion = cljs.core.nth.call(null,vec__23865,(1),null);
+return (function (p__33216){
+var vec__33217 = p__33216;
+var position = cljs.core.nth.call(null,vec__33217,(0),null);
+var quaternion = cljs.core.nth.call(null,vec__33217,(1),null);
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"camera-update","camera-update",-957684332),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"position","position",-2011731912),position,new cljs.core.Keyword(null,"quaternion","quaternion",1845825618),quaternion], null)], null));
 });})(node))
 );
@@ -83,4 +83,4 @@ return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 
 ;})(rotation,camera_props,rotation_speed))
 });
 
-//# sourceMappingURL=views.js.map?rel=1442608240299
+//# sourceMappingURL=views.js.map?rel=1442923870821

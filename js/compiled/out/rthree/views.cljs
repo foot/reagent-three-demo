@@ -11,7 +11,7 @@
 (def Mesh (reagent/adapt-react-class js/ReactTHREE.Mesh))
 (def Object3D (reagent/adapt-react-class js/ReactTHREE.Object3D))
 
-(defn assetpath [filename] (str "/assets/" filename))
+(defn assetpath [filename] (str "assets/" filename))
 
 (defn cupcake []
   (let [box-geometry (new js/THREE.BoxGeometry 200 200 200)

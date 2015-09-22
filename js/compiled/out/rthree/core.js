@@ -27,4 +27,4 @@ return rthree.core.mount_root.call(null);
 });
 goog.exportSymbol('rthree.core.init', rthree.core.init);
 
-//# sourceMappingURL=core.js.map?rel=1442604854468
+//# sourceMappingURL=core.js.map?rel=1442923845684
