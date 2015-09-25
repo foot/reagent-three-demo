@@ -10,6 +10,7 @@
 (def PerspectiveCamera (reagent/adapt-react-class js/ReactTHREE.PerspectiveCamera))
 (def Mesh (reagent/adapt-react-class js/ReactTHREE.Mesh))
 (def Object3D (reagent/adapt-react-class js/ReactTHREE.Object3D))
+(def PointLight (reagent/adapt-react-class js/ReactTHREE.PointLight))
 
 (defn assetpath [filename] (str "assets/" filename))
 
@@ -32,6 +33,18 @@
          [Mesh {:position (new js/THREE.Vector3 0 100 0)
                 :geometry box-geometry
                 :material cream-material}]]))))
+
+(defn height-map [r]
+  (let [mat (new THREE.MeshPhongMaterial #js {:color 0xffff00
+                                              :side THREE.DoubleSide})
+        geom (new js/THREE.PlaneGeometry 300 300 20 20)]
+    (doseq [[v i] (map vector (.-vertices geom) (range))]
+      (aset v "z" (* 10 (js/Math.sin (* r 0.001 i)))))
+    [Object3D
+     [PointLight {:intensity 2
+                  :distance 300
+                  :position (new js/THREE.Vector3 100 100 100)}]
+     [Mesh {:geometry geom :material mat}]]))
 
 (defn attach-camera-control-script
   "Attach a camera control script. js/THREE.OrbitControls leaves
@@ -63,11 +76,15 @@
                         camera-props
                         (fn [[position quaternion]]
                           (re-frame/dispatch
-                            [:camera-update {:position position
-                                             :quaternion quaternion}])))]))
+                            [:camera-update
+                             {:position position
+                              :quaternion quaternion}])))]))
      :reagent-render
      (fn [camera-props rotation]
-       [Scene {:width 300 :height 300 :camera "maincamera"}
+       [Scene {:width 300
+               :height 300
+               :camera "maincamera"
+               :enableRapidRender false}
         [PerspectiveCamera camera-props]
         [cupcake rotation]])}))
 
@@ -78,13 +95,20 @@
 
     (fn []
       [:div
-       [:div [example-scene @camera-props (* @rotation-speed @rotation)]]
+       [:div [example-scene @camera-props (* @rotation-speed @rotation)]
        [:input {:type "range"
                 :min 0
                 :max 0.05 
                 :step 0.001
                 :value @rotation-speed
                 :on-change (fn [ev] (let [v (-> ev .-target .-value )]
-                                      (re-frame/dispatch [:rotation-speed v])))}]
-       [:div [example-scene @camera-props (* 0.01 @rotation)]]
+                                      (re-frame/dispatch [:rotation-speed v])))}]]
+       [example-scene @camera-props (* 0.01 @rotation)]
+       [Scene {:width 300
+               :height 300
+               :camera "maincamera"
+               :enableRapidRender false}
+        [PerspectiveCamera @camera-props]
+        [height-map @rotation]]
+
        [:p (str "t = " @rotation)]])))

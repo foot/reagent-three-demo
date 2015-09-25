@@ -16,3 +16,8 @@
  :camera-props
  (fn [db]
    (reaction (:camera @db))))
+
+#_(re-frame/register-sub
+  :geometry
+  (fn [db]
+    (reaction)))
