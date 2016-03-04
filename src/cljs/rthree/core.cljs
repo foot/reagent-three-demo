@@ -11,14 +11,16 @@
 
 (defonce timeout-id (atom nil))
 
-(when @timeout-id
-  (js/clearInterval @timeout-id))
+(defn tick []
+  (reset! timeout-id
+          (js/requestAnimationFrame
+            (fn []
+              (re-frame/dispatch [:tick])
+              (tick)))))
 
-(reset! timeout-id
-        (js/setInterval
-          (fn []
-            (re-frame/dispatch [:tick]))
-          16))
+(when @timeout-id
+  (js/cancelAnimationFrame @timeout-id))
+(tick)
 
 (defn ^:export init [] 
   (re-frame/dispatch-sync [:initialize-db])
